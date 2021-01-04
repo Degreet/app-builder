@@ -35,6 +35,8 @@ commander
 							loader.stop();
 						} else if (type == 'back-end') {
 							loader.text = 'Creating back-end...';
+							await installBackEnd(name);
+							loader.stop();
 						} else {
 							loader.text = 'Creating back-end...';
 						}
@@ -98,6 +100,38 @@ async function installFrontEnd(name) {
 							}
 						);
 					});
+				});
+			}
+		}
+	);
+
+	return true;
+}
+
+async function installBackEnd(name) {
+	fs.readFile(
+		`${__dirname}/template/back-end/index.js`,
+		'utf8',
+		(err, content) => {
+			if (err) {
+				console.error('Fail!');
+			} else {
+				fs.writeFile(`${name}/index.js`, content, () => {
+					fs.readFile(
+						`${__dirname}/template/back-end/.gitignore`,
+						(_, gitignore) => {
+							fs.writeFile(`${name}/.gitignore`, gitignore, () => {
+								fs.readFile(
+									`${__dirname}/template/back-end/package.json`,
+									(_, pkg) => {
+										fs.writeFile(`${name}/package.json`, pkg, () => {
+											console.log('App created!');
+										});
+									}
+								);
+							});
+						}
+					);
 				});
 			}
 		}
