@@ -1,0 +1,19 @@
+{
+  "name": "app-builder",
+  "version": "1.0.0",
+  "preferGlobal": true,
+  "bin": "./index.js",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^6.2.1",
+    "inquirer": "^7.3.3",
+    "loading-cli": "^1.1.0"
+  }
+}
