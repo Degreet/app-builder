@@ -39,6 +39,8 @@ commander
 							loader.stop();
 						} else {
 							loader.text = 'Creating back-end...';
+							await installFullStack(name);
+							loader.stop();
 						}
 					});
 				}
@@ -138,6 +140,14 @@ async function installBackEnd(name) {
 	);
 
 	return true;
+}
+
+async function installFullStack(name) {
+	fs.mkdir(`${name}/public`, async () => {
+		await installBackEnd(name);
+		await installFrontEnd(`${name}/public`);
+		return true;
+	});
 }
 
 commander.parse(process.argv);
